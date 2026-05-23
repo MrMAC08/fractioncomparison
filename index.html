@@ -67,7 +67,7 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
             text-align: center;
             box-sizing: border-box;
@@ -93,7 +93,7 @@
         .score-board {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             padding: 15px;
             background: #f7fafc;
             border-radius: 15px;
@@ -120,9 +120,9 @@
         .fractions-display {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            margin: 30px 0;
+            align-items: stretch;
+            gap: 25px;
+            margin: 25px 0;
             flex-wrap: wrap;
         }
 
@@ -130,22 +130,23 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            min-width: 260px;
-        }
-
-        .fraction-label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             background: white;
             padding: 20px;
             border-radius: 15px;
             border: 2px solid #cbd5e0;
-            width: 100%;
+            min-width: 340px;
+            flex: 1;
             box-sizing: border-box;
-            font-size: 2.2rem;
-            font-weight: bold;
+            justify-content: space-between;
+        }
+
+        .fraction-math-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 20px;
         }
 
         .num-denom-display {
@@ -154,6 +155,9 @@
             align-items: center;
             justify-content: center;
             min-width: 60px;
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: #2d3748;
         }
 
         .frac-line {
@@ -163,21 +167,44 @@
             margin: 6px 0;
         }
 
+        .visual-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+            min-height: 130px;
+            width: 100%;
+        }
+
+        .pie-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+
+        .pie-canvas {
+            background: #f8fafc;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 5px;
+        }
+
         .book-working-container {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            width: 100%;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px dashed #e2e8f0;
             font-size: 1.5rem;
         }
 
         .arrow-indicator {
             color: #a855f7;
             font-size: 1.8rem;
+            font-weight: bold;
         }
 
         .working-stack {
@@ -203,12 +230,13 @@
         }
 
         .working-text-node {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: #4c1d95;
             height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
         }
 
         .center-lcd-box {
@@ -217,7 +245,7 @@
             padding: 15px;
             border-radius: 12px;
             margin: 15px auto;
-            max-width: 400px;
+            max-width: 420px;
             font-weight: bold;
         }
 
@@ -247,7 +275,7 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 20px;
+            margin-top: 25px;
             flex-wrap: wrap;
         }
 
@@ -258,7 +286,13 @@
             border: none;
             border-radius: 15px;
             cursor: pointer;
-            min-width: 120px;
+            min-width: 140px;
+        }
+
+        .answer-btn:disabled {
+            background: #cbd5e0 !important;
+            color: #a0aec0 !important;
+            cursor: not-allowed;
         }
 
         .btn-option-a { background: #4299e1; color: white; }
@@ -269,6 +303,18 @@
             background: #a855f7;
             color: white;
             border: 2px solid #9333ea;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-weight: bold;
+        }
+
+        .visual-toggle-btn {
+            background: #4a5568;
+            color: white;
+            border: none;
             padding: 12px 24px;
             border-radius: 10px;
             font-size: 1.1rem;
@@ -318,31 +364,11 @@
             background: #e53e3e;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 10px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-        }
-
-        .final-sync-btn {
-            background: #2f855a;
-            color: white;
-            padding: 20px 40px;
-            font-size: 1.6rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            margin-top: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
         }
 
         .hidden-element { display: none !important; }
@@ -350,25 +376,25 @@
 </head>
 <body>
 
-    <div class="gatekeeper-container" id="gatekeeperScreen">
-        <h2>Welcome to the Fractions Assignment!</h2>
-        <p>Please enter your first and last name to begin:</p>
-        <input type="text" id="studentNameInput" placeholder="Your Name..." oninput="checkNameInput()">
+    <div class="gatekeeper-container" id="loginGate">
+        <h2>Welcome to Fractions Practice!</h2>
+        <p style="color: #718096; margin-bottom: 25px;">Please enter your full name to begin your assignment.</p>
+        <input type="text" id="studentNameInput" placeholder="Your Full Name..." oninput="evaluateNameStatus()">
         <br>
-        <button id="startAssignmentBtn" class="start-btn" onclick="letTheGameBegin()" disabled>Start Assignment ➔</button>
+        <button id="beginGameBtn" class="start-btn" disabled onclick="registerStudentAndStart()">Start Practice ➔</button>
     </div>
 
     <div class="game-container hidden-element" id="mainContainer">
-        <h1>🥧 Fractions Assignment 🥧</h1>
-        <div class="student-badge" id="activeStudentBadge">👤 Student: </div>
+        <h1>🥧 Fractions Practice & Visualizer </h1>
+        <div class="student-badge">Student: <span id="activeStudentLabel">None</span></div>
         
         <div class="score-board">
             <div class="score">Points: <span id="score">0</span></div>
-            <div class="progress-tracker">Question: <span id="currentQuestionNum">1</span> of <span id="totalQuestionsNum">5</span></div>
+            <div class="progress-tracker">Progress: Question <span id="currentQuestionNum">1</span> of <span id="totalQuestionsNum">10</span></div>
         </div>
 
         <div class="question-area" id="activePlayArea">
-            <div class="question">Which fraction is larger?</div>
+            <div class="question" id="mainQuestionHeading">Which fraction is larger?</div>
             
             <div id="centerLcdBox" class="center-lcd-box hidden-element">
                 <span>Find the Lowest Common Denominator (LCD):</span><br><br>
@@ -379,43 +405,43 @@
 
             <div class="fractions-display">
                 <div class="fraction-item">
-                    <div class="fraction-label">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div class="num-denom-display">
-                                <span id="f1-num">1</span>
-                                <div class="frac-line"></div>
-                                <span id="f1-den">2</span>
-                            </div>
-                            <div id="bookWorkingContainer1"></div>
+                    <div class="fraction-math-row">
+                        <div class="num-denom-display" id="f1-display-block">
+                            <span id="f1-num">1</span>
+                            <div class="frac-line"></div>
+                            <span id="f1-den">12</span>
                         </div>
+                        <div id="bookWorkingContainer1"></div>
                     </div>
+                    <div class="visual-container hidden-element" id="visualWrapper1"></div>
                 </div>
                 
                 <div class="fraction-item">
-                    <div class="fraction-label">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div class="num-denom-display">
-                                <span id="f2-num">1</span>
-                                <div class="frac-line"></div>
-                                <span id="f2-den">3</span>
-                            </div>
-                            <div id="bookWorkingContainer2"></div>
+                    <div class="fraction-math-row">
+                        <div class="num-denom-display" id="f2-display-block">
+                            <span id="f2-num">4</span>
+                            <div class="frac-line"></div>
+                            <span id="f2-den">5</span>
                         </div>
+                        <div id="bookWorkingContainer2"></div>
                     </div>
+                    <div class="visual-container hidden-element" id="visualWrapper2"></div>
                 </div>
             </div>
 
             <div id="actionButtonsContainer">
                 <button id="convertBtn" class="help-btn" onclick="startConversionWorkspace()">⚙️ Convert to the same denominator</button>
+                <button id="togglePieBtn" class="visual-toggle-btn" onclick="revealPiesManually()">Show Visual Hints</button>
             </div>
 
             <div class="answer-buttons">
-                <button class="answer-btn btn-option-a" onclick="checkAnswer('A')">Left Fraction</button>
-                <button class="answer-btn btn-equal" onclick="checkAnswer('Equal')">Equal</button>
-                <button class="answer-btn btn-option-b" onclick="checkAnswer('B')">Right Fraction</button>
+                <button class="answer-btn btn-option-a" id="btnA" onclick="checkAnswer('A')">Left Fraction</button>
+                <button class="answer-btn btn-equal" id="btnEqual" onclick="checkAnswer('Equal')">Equal</button>
+                <button class="answer-btn btn-option-b" id="btnB" onclick="checkAnswer('B')">Right Fraction</button>
             </div>
 
             <div class="feedback" id="feedback"></div>
+            
             <button class="new-game-btn hidden-element" id="nextQuestionBtn" onclick="newQuestion()">Next Question ➔</button>
         </div>
 
@@ -425,40 +451,41 @@
     </div>
 
     <script>
-        // --- GOOGLE FORM REDIRECT CONFIGURATION ---
-        const TOTAL_QUESTIONS = 5; 
-        const BASE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScvx6TtF2ZweIF8hEgkPnk7eXz-5JcnHY6MgD875_twmJ13lw/viewform";
-        
+        // --- ASSIGNMENT DATA LINK CONFIGURATION ---
+        const TOTAL_QUESTIONS = 10; 
+        const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLScvx6TtF2ZweIF8hEgkPnk7eXz-5JcnHY6MgD875_twmJ13lw/formResponse"; 
         const NAME_ID    = "entry.1276936595"; 
         const PROBLEM_ID = "entry.1193311180"; 
         const OUTCOME_ID = "entry.746519509"; 
         const MISTAKE_ID = "entry.1716961822"; 
 
-        let score = 0, currentQuestionIndex = 1, currentAnswer = '';
+        let score = 0, currentQuestionIndex = 1;
+        let currentAnswer = '';
         let fraction1, fraction2;
         let usedConversion = false;
         let selectedDenominator = 0;
-        let finalStudentName = "";
+        let activeStudentName = "";
+        let mistakeLog = [];
 
-        // Performance compilation variables
-        let problemHistory = [];
-        let outcomeHistory = [];
-        let mistakeHistory = [];
-
-        document.getElementById('totalQuestionsNum').textContent = TOTAL_QUESTIONS;
-
-        function checkNameInput() {
-            const inputVal = document.getElementById('studentNameInput').value.trim();
-            document.getElementById('startAssignmentBtn').disabled = inputVal.length < 3;
+        // GATEKEEPER LOGIN MANAGER
+        function evaluateNameStatus() {
+            const nameField = document.getElementById('studentNameInput').value.trim();
+            document.getElementById('beginGameBtn').disabled = (nameField.length < 2);
         }
 
-        function letTheGameBegin() {
-            finalStudentName = document.getElementById('studentNameInput').value.trim();
-            document.getElementById('activeStudentBadge').textContent = `👤 Student: ${finalStudentName}`;
-            document.getElementById('gatekeeperScreen').classList.add('hidden-element');
+        function registerStudentAndStart() {
+            activeStudentName = document.getElementById('studentNameInput').value.trim();
+            document.getElementById('activeStudentLabel').textContent = activeStudentName;
+            document.getElementById('loginGate').classList.add('hidden-element');
             document.getElementById('mainContainer').classList.remove('hidden-element');
+            document.getElementById('totalQuestionsNum').textContent = TOTAL_QUESTIONS;
+            currentQuestionIndex = 1;
+            score = 0;
+            mistakeLog = [];
+            setupQuestionEngine();
         }
 
+        // GENERATIVE MATH UTILS
         function generateFraction() {
             const denominators = [2, 3, 4, 5, 6, 8, 10, 12];
             const denominator = denominators[Math.floor(Math.random() * denominators.length)];
@@ -471,6 +498,95 @@
             while(true) { if (min % a === 0 && min % b === 0) return min; min++; }
         }
 
+        // CANVAS GRAPHICS GENERATION
+        function drawFractionPie(canvasElement, numerator, denominator, color = "#3b82f6") {
+            if (!canvasElement) return;
+            const ctx = canvasElement.getContext('2d');
+            const cx = canvasElement.width / 2;
+            const cy = canvasElement.height / 2;
+            const radius = Math.min(cx, cy) - 5;
+
+            ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+            if (numerator > 0) {
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                const startAngle = -Math.PI / 2;
+                const endAngle = startAngle + (2 * Math.PI * (numerator / denominator));
+                ctx.arc(cx, cy, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = "#cbd5e0";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            for (let i = 0; i < denominator; i++) {
+                const angle = (-Math.PI / 2) + (2 * Math.PI * (i / denominator));
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(cx + radius * Math.cos(angle), cy + radius * Math.sin(angle));
+                ctx.strokeStyle = "#4a5568";
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+        }
+
+        function revealPiesManually() {
+            renderPiesLayout(false); 
+            document.getElementById('visualWrapper1').classList.remove('hidden-element');
+            document.getElementById('visualWrapper2').classList.remove('hidden-element');
+            document.getElementById('togglePieBtn').style.display = 'none';
+        }
+
+        function forceShowPiesAutomatic(showComparison = false) {
+            renderPiesLayout(showComparison);
+            document.getElementById('visualWrapper1').classList.remove('hidden-element');
+            document.getElementById('visualWrapper2').classList.remove('hidden-element');
+            document.getElementById('togglePieBtn').style.display = 'none';
+        }
+
+        function renderPiesLayout(showComparison) {
+            const wrap1 = document.getElementById('visualWrapper1');
+            const wrap2 = document.getElementById('visualWrapper2');
+            const commonLCM = findLCM(fraction1.denominator, fraction2.denominator);
+            const finalLeftNum = (commonLCM / fraction1.denominator) * fraction1.numerator;
+            const finalRightNum = (commonLCM / fraction2.denominator) * fraction2.numerator;
+
+            if (showComparison) {
+                wrap1.innerHTML = `
+                    <div class="pie-box"><canvas id="p1-orig" class="pie-canvas" width="105" height="105"></canvas>Original</div>
+                    <div style="font-size:1.5rem;color:#cbd5e0;">➔</div>
+                    <div class="pie-box"><canvas id="p1-conv" class="pie-canvas" width="105" height="105"></canvas>Converted</div>`;
+                wrap2.innerHTML = `
+                    <div class="pie-box"><canvas id="p2-orig" class="pie-canvas" width="105" height="105"></canvas>Original</div>
+                    <div style="font-size:1.5rem;color:#cbd5e0;">➔</div>
+                    <div class="pie-box"><canvas id="p2-conv" class="pie-canvas" width="105" height="105"></canvas>Converted</div>`;
+
+                drawFractionPie(document.getElementById('p1-orig'), fraction1.numerator, fraction1.denominator, "#3b82f6");
+                drawFractionPie(document.getElementById('p1-conv'), finalLeftNum, commonLCM, "#3b82f6");
+                
+                drawFractionPie(document.getElementById('p2-orig'), fraction2.numerator, fraction2.denominator, "#10b981");
+                drawFractionPie(document.getElementById('p2-conv'), finalRightNum, commonLCM, "#10b981");
+            } else {
+                wrap1.innerHTML = `<div class="pie-box"><canvas id="p1-solo" class="pie-canvas" width="120" height="120"></canvas></div>`;
+                wrap2.innerHTML = `<div class="pie-box"><canvas id="p2-solo" class="pie-canvas" width="120" height="120"></canvas></div>`;
+                
+                if (selectedDenominator > 0) {
+                    drawFractionPie(document.getElementById('p1-solo'), fraction1.numerator * (selectedDenominator / fraction1.denominator), selectedDenominator, "#3b82f6");
+                    drawFractionPie(document.getElementById('p2-solo'), fraction2.numerator * (selectedDenominator / fraction2.denominator), selectedDenominator, "#10b981");
+                } else {
+                    drawFractionPie(document.getElementById('p1-solo'), fraction1.numerator, fraction1.denominator, "#3b82f6");
+                    drawFractionPie(document.getElementById('p2-solo'), fraction2.numerator, fraction2.denominator, "#10b981");
+                }
+            }
+        }
+
+        // LCD WORKSPACE CONVERTER FLOWS
         function startConversionWorkspace() {
             usedConversion = true;
             document.getElementById('convertBtn').style.display = 'none';
@@ -489,8 +605,10 @@
 
             if (inputVal === trueLCM) {
                 selectedDenominator = inputVal;
-                feedback.innerHTML = `🎉 Correct LCD! Now compute the numerators.`;
+                feedback.innerHTML = `🎉 Correct LCD! The pie charts below updated. Process the top slots.`;
                 feedback.className = "workspace-feedback success";
+
+                forceShowPiesAutomatic(false);
 
                 document.getElementById('bookWorkingContainer1').innerHTML = `
                     <div id="bookWorking1" class="book-working-container">
@@ -519,10 +637,12 @@
                     </div>`;
 
                 document.getElementById('centerLcdBox').classList.add('hidden-element');
+            } else if (inputVal % fraction1.denominator === 0 && inputVal % fraction2.denominator === 0) {
+                feedback.innerHTML = `❌ ${inputVal} works, but it's <strong>not the lowest</strong> multiple.`;
+                mistakeLog.push(`Q#${currentQuestionIndex} LCD Mistake: Entered ${inputVal} instead of ${trueLCM}`);
             } else {
-                feedback.textContent = `❌ That is not the lowest common denominator. Try again!`;
-                feedback.className = "workspace-feedback";
-                mistakeHistory.push(`Q${currentQuestionIndex} Wrong LCD: ${inputVal}`);
+                feedback.textContent = `❌ That is not a multiple of both denominators.`;
+                mistakeLog.push(`Q#${currentQuestionIndex} LCD Entry: ${inputVal} is not a multiple`);
             }
         }
 
@@ -532,12 +652,12 @@
             const targetNum = (selectedDenominator / fraction1.denominator) * fraction1.numerator;
 
             if (inputNum === targetNum) {
-                feedback.textContent = "🎉 Left side updated!";
+                feedback.textContent = "🎉 Left side scaled correctly!";
                 feedback.className = "workspace-feedback success";
                 document.getElementById('leftTopSlot').innerHTML = `<span style="color:#7c3aed;">${inputNum}</span>`;
             } else {
-                feedback.textContent = "❌ Incorrect scaling multiplier.";
-                mistakeHistory.push(`Q${currentQuestionIndex} Left Scale Error: ${inputNum}`);
+                feedback.textContent = "❌ Multiplier calculation tracking issue.";
+                mistakeLog.push(`Q#${currentQuestionIndex} Left Num Mistake: Entered ${inputNum} instead of ${targetNum}`);
             }
         }
 
@@ -547,45 +667,49 @@
             const targetNum = (selectedDenominator / fraction2.denominator) * fraction2.numerator;
 
             if (inputNum === targetNum) {
-                feedback.textContent = "🎉 Right side updated! Now pick the larger fraction below.";
+                feedback.textContent = "🎉 Right side scaled correctly! Choose assignment relation option below.";
                 feedback.className = "workspace-feedback success";
                 document.getElementById('rightTopSlot').innerHTML = `<span style="color:#7c3aed;">${inputNum}</span>`;
             } else {
-                feedback.textContent = "❌ Incorrect scaling multiplier.";
-                mistakeHistory.push(`Q${currentQuestionIndex} Right Scale Error: ${inputNum}`);
+                feedback.textContent = "❌ Multiplier calculation tracking issue.";
+                mistakeLog.push(`Q#${currentQuestionIndex} Right Num Mistake: Entered ${inputNum} instead of ${targetNum}`);
             }
         }
 
+        // RESPONSE REPORT ENGINE
         function checkAnswer(userAnswer) {
             const feedbackElement = document.getElementById('feedback');
+            const commonLCM = findLCM(fraction1.denominator, fraction2.denominator);
             
-            // Build current problem string summary
-            problemHistory.push(`#${currentQuestionIndex} (${fraction1.numerator}/${fraction1.denominator} vs ${fraction2.numerator}/${fraction2.denominator})`);
+            const finalLeftNum = (commonLCM / fraction1.denominator) * fraction1.numerator;
+            const finalRightNum = (commonLCM / fraction2.denominator) * fraction2.numerator;
 
             if (userAnswer === currentAnswer) {
                 score += 10;
                 feedbackElement.textContent = `🎉 Correct!`;
                 feedbackElement.className = 'feedback correct'; 
-                outcomeHistory.push(`Q${currentQuestionIndex}: Correct` + (usedConversion ? " (Used LCD)" : ""));
             } else {
                 feedbackElement.textContent = `❌ Incorrect choice.`;
                 feedbackElement.className = 'feedback incorrect';
-                outcomeHistory.push(`Q${currentQuestionIndex}: Incorrect`);
-                mistakeHistory.push(`Q${currentQuestionIndex} picked ${userAnswer}`);
+                mistakeLog.push(`Q#${currentQuestionIndex} Setup (${fraction1.numerator}/${fraction1.denominator} vs ${fraction2.numerator}/${fraction2.denominator}) - Chose: ${userAnswer}`);
             }
             
             document.getElementById('score').textContent = score;
 
+            // Clean down interactive UI layers
             document.getElementById('convertBtn').style.display = 'none';
+            document.getElementById('togglePieBtn').style.display = 'none';
             document.getElementById('centerLcdBox').classList.add('hidden-element');
+            toggleAnswerButtons(true);
 
-            const commonLCM = findLCM(fraction1.denominator, fraction2.denominator);
-            
+            // Reveal full structural feedback mappings
+            forceShowPiesAutomatic(true);
+
             document.getElementById('bookWorkingContainer1').innerHTML = `
                 <div class="book-working-container">
                     <div class="arrow-indicator">➔</div>
                     <div class="working-stack">
-                        <div class="working-text-node"><span style="color:#7c3aed;">${(commonLCM/fraction1.denominator)*fraction1.numerator}</span></div>
+                        <div class="working-text-node"><span style="color:#7c3aed;">${finalLeftNum}</span></div>
                         <div class="frac-line" style="background-color:#a855f7;"></div>
                         <div class="working-text-node" style="color:#7c3aed;">${commonLCM}</div>
                     </div>
@@ -595,7 +719,7 @@
                 <div class="book-working-container">
                     <div class="arrow-indicator">➔</div>
                     <div class="working-stack">
-                        <div class="working-text-node"><span style="color:#7c3aed;">${(commonLCM/fraction2.denominator)*fraction2.numerator}</span></div>
+                        <div class="working-text-node"><span style="color:#7c3aed;">${finalRightNum}</span></div>
                         <div class="frac-line" style="background-color:#a855f7;"></div>
                         <div class="working-text-node" style="color:#7c3aed;">${commonLCM}</div>
                     </div>
@@ -604,33 +728,69 @@
             if (currentQuestionIndex < TOTAL_QUESTIONS) {
                 document.getElementById('nextQuestionBtn').classList.remove('hidden-element');
             } else {
-                finishAssignmentComplete();
+                finishAssignmentComplete(false);
             }
         }
 
-        function setupQuestionData(f1, f2) {
-            fraction1 = f1; fraction2 = f2;
-            document.getElementById('f1-num').textContent = fraction1.numerator;
-            document.getElementById('f1-den').textContent = fraction1.denominator;
-            document.getElementById('f2-num').textContent = fraction2.numerator;
-            document.getElementById('f2-den').textContent = fraction2.denominator;
-            currentAnswer = (fraction1.numerator/fraction1.denominator) === (fraction2.numerator/fraction2.denominator) ? 'Equal' : (fraction1.numerator/fraction1.denominator) > (fraction2.numerator/fraction2.denominator) ? 'A' : 'B';
-            
-            document.getElementById('bookWorkingContainer1').innerHTML = "";
-            document.getElementById('bookWorkingContainer2').innerHTML = "";
+        function toggleAnswerButtons(disabledState) {
+            document.getElementById('btnA').disabled = disabledState;
+            document.getElementById('btnEqual').disabled = disabledState;
+            document.getElementById('btnB').disabled = disabledState;
         }
 
-        function newQuestion() {
-            currentQuestionIndex++;
-            document.getElementById('currentQuestionNum').textContent = currentQuestionIndex;
-            document.getElementById('nextQuestionBtn').classList.add('hidden-element');
+        // REDIRECT AND POPULATE REAL GOOGLE FORM
+        function launchPreFilledGoogleForm(statusLabel) {
+            const studentName = activeStudentName || "Anonymous Student";
+            const problemText = `Fractions Practice Assignment Summary Details`;
             
+            let finalOutcomeString = `${statusLabel} | Final Score: ${score} Points (Finished ${currentQuestionIndex}/10 Questions)`;
+            if (usedConversion) {
+                finalOutcomeString += " [Used LCD Conversion Tool Builder]";
+            }
+
+            const cleanMistakesString = mistakeLog.length > 0 ? mistakeLog.join(" || ") : "No structural calculation mistakes recorded.";
+
+            // Construct the real direct view link with parameters filled directly
+            const preFilledUrl = `${GOOGLE_FORM_ACTION_URL.replace('/formResponse', '/viewform')}?` +
+                `${NAME_ID}=${encodeURIComponent(studentName)}&` +
+                `${PROBLEM_ID}=${encodeURIComponent(problemText)}&` +
+                `${OUTCOME_ID}=${encodeURIComponent(finalOutcomeString)}&` +
+                `${MISTAKE_ID}=${encodeURIComponent(cleanMistakesString)}`;
+
+            // Force browser to open form in a fresh interactive container tab 
+            window.open(preFilledUrl, '_blank');
+        }
+
+        function setupQuestionEngine() {
+            document.getElementById('currentQuestionNum').textContent = currentQuestionIndex;
+            toggleAnswerButtons(false);
             usedConversion = false;
 
             let f1 = generateFraction(); let f2 = generateFraction();
             while (f1.numerator === f2.numerator && f1.denominator === f2.denominator) { f2 = generateFraction(); }
             
-            setupQuestionData(f1, f2);
+            fraction1 = f1; fraction2 = f2;
+            selectedDenominator = 0;
+            
+            document.getElementById('f1-display-block').innerHTML = `
+                <span id="f1-num">${fraction1.numerator}</span>
+                <div class="frac-line"></div>
+                <span id="f1-den">${fraction1.denominator}</span>`;
+                
+            document.getElementById('f2-display-block').innerHTML = `
+                <span id="f2-num">${fraction2.numerator}</span>
+                <div class="frac-line"></div>
+                <span id="f2-den">${fraction2.denominator}</span>`;
+
+            currentAnswer = (fraction1.numerator/fraction1.denominator) === (fraction2.numerator/fraction2.denominator) ? 'Equal' : (fraction1.numerator/fraction1.denominator) > (fraction2.numerator/fraction2.denominator) ? 'A' : 'B';
+            
+            document.getElementById('bookWorkingContainer1').innerHTML = "";
+            document.getElementById('bookWorkingContainer2').innerHTML = "";
+
+            document.getElementById('visualWrapper1').classList.add('hidden-element');
+            document.getElementById('visualWrapper2').classList.add('hidden-element');
+            document.getElementById('togglePieBtn').style.display = 'inline-block';
+            
             document.getElementById('centerLcdBox').classList.add('hidden-element');
             document.getElementById('feedback').textContent = '';
             document.getElementById('feedback').className = 'feedback';
@@ -638,55 +798,38 @@
             document.getElementById('convertBtn').style.display = 'inline-block';
         }
 
+        function newQuestion() {
+            document.getElementById('nextQuestionBtn').classList.add('hidden-element');
+            currentQuestionIndex++;
+            setupQuestionEngine();
+        }
+
         function submitAssignmentEarly() {
-            if(confirm("Are you sure you want to turn in your work early? Your score will be calculated based on your progress so far.")) {
-                outcomeHistory.push("Turned In Early on Q" + currentQuestionIndex);
+            if (confirm("Are you sure you want to turn in your work early? Your current progress will be saved.")) {
+                launchPreFilledGoogleForm("Early Submission / Turned In Early");
                 finishAssignmentComplete(true);
             }
         }
 
         function finishAssignmentComplete(wasEarly = false) {
-            const playArea = document.getElementById('activePlayArea');
             document.getElementById('earlySubmitArea').classList.add('hidden-element');
+            document.getElementById('mainQuestionHeading').innerHTML = wasEarly ? "📤 Turned In Early" : "🎉 Assignment Complete!";
             
-            // Build the unblockable custom prefilled data parameters strings
-            const finalProblems = problemHistory.join(" | ") || "None completed";
-            const finalOutcomes = "Score: " + score + " pts | " + outcomeHistory.join(" | ");
-            const finalMistakes = mistakeHistory.join(" | ") || "No recorded scaling/LCD mistakes";
+            if (!wasEarly) {
+                launchPreFilledGoogleForm("Assignment Completed Normally");
+            }
 
-            // Generate secure encoded payload URLs mapping perfectly to your parameters
-            const prefilledUrl = BASE_FORM_URL + "?" + 
-                NAME_ID + "=" + encodeURIComponent(finalStudentName) + "&" +
-                PROBLEM_ID + "=" + encodeURIComponent(finalProblems) + "&" +
-                OUTCOME_ID + "=" + encodeURIComponent(finalOutcomes) + "&" +
-                MISTAKE_ID + "=" + encodeURIComponent(finalMistakes);
-
-            let headerText = wasEarly ? "<h3>Assignment Turned In Early!</h3>" : "<h3>🎉 Assignment Complete!</h3>";
-            
-            playArea.innerHTML = `
-                <div style="padding: 30px; background: #f0fdf4; border-radius: 15px; color: #166534; text-align: center;">
-                    ${headerText}
-                    <p style="font-size: 1.4rem; font-weight: bold; color: #2d3748;">Your Score: ${score} points.</p>
-                    
-                    <hr style="border: 1px dashed #cbd5e0; margin: 20px 0;">
-                    
-                    <p style="font-size: 1.1rem; color: #2b6cb0; font-weight: bold;">
-                        ⚠️ ONE FINAL STEP TO SEND THIS TO YOUR TEACHER:
-                    </p>
-                    <p style="color: #4a5568;">
-                        Click the green button below. It will open your school form with your score already filled out. Just click <strong>Submit</strong> on that page!
-                    </p>
-                    
-                    <button class="final-sync-btn" onclick="window.open('${prefilledUrl}', '_blank')">
-                        🟢 Click Here to Sync Your Grade
-                    </button>
-                </div>
-            `;
+            document.getElementById('activePlayArea').innerHTML = `
+                <div style="padding: 30px; text-align: center;">
+                    <h2 style="color: #2f855a; font-size: 2.2rem;">Great job, ${activeStudentName}!</h2>
+                    <p style="font-size: 1.3rem; color: #4a5568; margin: 15px 0;">Please check your newly opened browser tab to confirm and submit your final score to the teacher console!</p>
+                    <div style="background: #f0fff4; border: 3px solid #38a169; display: inline-block; padding: 20px 40px; border-radius: 15px; margin: 20px 0;">
+                        <span style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: #276749; font-weight: bold; display: block; margin-bottom: 5px;">Final Score Logged</span>
+                        <span style="font-size: 3rem; font-weight: bold; color: #22543d;">${score} Points</span>
+                    </div>
+                    <p style="color: #718096; font-size: 1rem; margin-top: 10px;">If the Google Form did not automatically open, please disable your browser's pop-up blocker.</p>
+                </div>`;
         }
-
-        let initF1 = generateFraction(); let initF2 = generateFraction();
-        while (initF1.numerator === initF2.numerator && initF1.denominator === initF2.denominator) { initF2 = generateFraction(); }
-        setupQuestionData(initF1, initF2);
     </script>
 </body>
 </html>
