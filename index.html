@@ -696,13 +696,11 @@
             
             document.getElementById('score').textContent = score;
 
-            // Clean down interactive UI layers
             document.getElementById('convertBtn').style.display = 'none';
             document.getElementById('togglePieBtn').style.display = 'none';
             document.getElementById('centerLcdBox').classList.add('hidden-element');
             toggleAnswerButtons(true);
 
-            // Reveal full structural feedback mappings
             forceShowPiesAutomatic(true);
 
             document.getElementById('bookWorkingContainer1').innerHTML = `
@@ -738,26 +736,24 @@
             document.getElementById('btnB').disabled = disabledState;
         }
 
-        // REDIRECT AND POPULATE REAL GOOGLE FORM
+        // REDIRECT AND POPULATE REAL GOOGLE FORM (V2 POPUP PROCESS)
         function launchPreFilledGoogleForm(statusLabel) {
             const studentName = activeStudentName || "Anonymous Student";
             const problemText = `Fractions Practice Assignment Summary Details`;
             
             let finalOutcomeString = `${statusLabel} | Final Score: ${score} Points (Finished ${currentQuestionIndex}/10 Questions)`;
             if (usedConversion) {
-                finalOutcomeString += " [Used LCD Conversion Tool Builder]";
+                finalOutcomeString += " [Used LCD Conversion Tool]";
             }
 
             const cleanMistakesString = mistakeLog.length > 0 ? mistakeLog.join(" || ") : "No structural calculation mistakes recorded.";
 
-            // Construct the real direct view link with parameters filled directly
             const preFilledUrl = `${GOOGLE_FORM_ACTION_URL.replace('/formResponse', '/viewform')}?` +
                 `${NAME_ID}=${encodeURIComponent(studentName)}&` +
                 `${PROBLEM_ID}=${encodeURIComponent(problemText)}&` +
                 `${OUTCOME_ID}=${encodeURIComponent(finalOutcomeString)}&` +
                 `${MISTAKE_ID}=${encodeURIComponent(cleanMistakesString)}`;
 
-            // Force browser to open form in a fresh interactive container tab 
             window.open(preFilledUrl, '_blank');
         }
 
@@ -827,7 +823,7 @@
                         <span style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: #276749; font-weight: bold; display: block; margin-bottom: 5px;">Final Score Logged</span>
                         <span style="font-size: 3rem; font-weight: bold; color: #22543d;">${score} Points</span>
                     </div>
-                    <p style="color: #718096; font-size: 1rem; margin-top: 10px;">If the Google Form did not automatically open, please disable your browser's pop-up blocker.</p>
+                    <p style="color: #718096; font-size: 1rem; margin-top: 10px;">If the Google Form did not automatically open, please allow pop-ups for this site in your browser.</p>
                 </div>`;
         }
     </script>
